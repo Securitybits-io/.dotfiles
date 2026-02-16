@@ -1,5 +1,15 @@
+import = [
+  "~/.config/alacritty/catppuccin-mocha.toml"
+]
+
 [mouse]
 hide_when_typing = false
 
 [window]
 dynamic_title = true
+
+[env]
+TERM = "xterm-256color"
+
+
+
