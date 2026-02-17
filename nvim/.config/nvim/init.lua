@@ -3,12 +3,12 @@ vim.cmd("set number")
 vim.cmd("set relativenumber")
 
 -- Indentation (Standard 4-space indent)
--- vim.cmd("set expandtab")
--- vim.cmd("set tabstop=2")
--- vim.cmd("set softtabstop=2")
--- vim.cmd("set shiftwidth=2")
--- vim.cmd("set smartindent")
--- --
+vim.cmd("set expandtab")
+vim.cmd("set tabstop=2")
+vim.cmd("set softtabstop=2")
+vim.cmd("set shiftwidth=2")
+vim.cmd("set smartindent")
+--
 -- -- Search Behavior
 -- vim.opt.ignorecase = true     -- Ignore case when searching...
 -- vim.opt.smartcase = true      -- ...unless you use a capital letter
@@ -23,7 +23,7 @@ vim.cmd("set relativenumber")
 --
 -- -- Utility
 -- vim.opt.clipboard = "unnamedplus" -- Use system clipboard (copy/paste to other apps)
--- vim.opt.undofile = true           -- Save undo history to a file (stays after closing)
+vim.cmd("set undofile")
 --
 -- -- Disable the Neovim right-click popup menu
 -- vim.cmd([[aunmenu PopUp]])
@@ -45,10 +45,16 @@ vim.opt.rtp:prepend(lazypath)
 
 local opts = {}
 local plugins = {
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "nvim-telescope/telescope.nvim", tag = "latest",
+    dependencies = { "nvim-lua/plenary.nvim" }
+  }
 }
 
 require("lazy").setup(plugins, opts)
+
+local builtin = require("telescope.builtin")
+vim.keymap.set("n", "<C-p>", builtin.find_files, {})
 
 -- Catppuccin Setup
 require("catppuccin").setup()
