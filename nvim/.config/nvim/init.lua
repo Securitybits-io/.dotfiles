@@ -1,13 +1,14 @@
 -- Line Numbers (which we already discussed)
-vim.opt.number = true
-vim.opt.relativenumber = true
+vim.cmd("set number")
+vim.cmd("set relativenumber")
 
 -- Indentation (Standard 4-space indent)
-vim.opt.expandtab = true      -- Convert tabs to spaces
-vim.opt.shiftwidth = 2        -- Size of an indent
-vim.opt.tabstop = 2           -- Number of spaces tabs count for
-vim.opt.smartindent = true    -- Insert indents automatically
---
+-- vim.cmd("set expandtab")
+-- vim.cmd("set tabstop=2")
+-- vim.cmd("set softtabstop=2")
+-- vim.cmd("set shiftwidth=2")
+-- vim.cmd("set smartindent")
+-- --
 -- -- Search Behavior
 -- vim.opt.ignorecase = true     -- Ignore case when searching...
 -- vim.opt.smartcase = true      -- ...unless you use a capital letter
@@ -43,6 +44,12 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local opts = {}
-local plugins = {}
+local plugins = {
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+}
 
 require("lazy").setup(plugins, opts)
+
+-- Catppuccin Setup
+require("catppuccin").setup()
+vim.cmd.colorscheme "catppuccin"
