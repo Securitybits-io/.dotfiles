@@ -44,27 +44,3 @@ local plugins = {}
 
 require("lazy").setup("plugins")
 
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<C-p>", builtin.find_files, {})
-vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left" )
-
-
-local config = require("nvim-treesitter.config")
-config.setup({
-  ensure_installed = {
-    "lua",
-    "javscript",
-    "powershell", 
-    "bash", 
-    "c", 
-    "asm",
-  },
-  highlight = { enable = true },
-  indent = { enable = true },
-})
-
-
--- Catppuccin Setup
-require("catppuccin").setup()
-vim.cmd.colorscheme "catppuccin"
