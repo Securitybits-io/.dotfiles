@@ -16,7 +16,7 @@ vim.cmd("set smartindent")
 --
 -- -- Interface Improvements
 -- vim.opt.termguicolors = true  -- Enable 24-bit RGB colors
--- vim.opt.scrolloff = 8         -- Keep 8 lines above/below cursor (stops it hitting the edge)
+vim.opt.scrolloff = 8         -- Keep 8 lines above/below cursor (stops it hitting the edge)
 -- vim.opt.mouse = 'a'           -- Enable mouse support (clicking, scrolling)
 -- vim.opt.cursorline = true     -- Highlight the line the cursor is on
 -- vim.opt.wrap = false          -- Don't wrap long lines (better for code)
@@ -29,6 +29,8 @@ vim.cmd("set undofile")
 -- vim.cmd([[aunmenu PopUp]])
 -- vim.opt.mousemodel = "extend"
 --
+-- Set the Leader
+vim.g.mapleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -46,16 +48,23 @@ vim.opt.rtp:prepend(lazypath)
 local opts = {}
 local plugins = {
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  { "nvim-telescope/telescope.nvim", tag = "latest",
-    dependencies = { "nvim-lua/plenary.nvim" }
-  }
+  { "nvim-telescope/telescope.nvim", tag = "latest", dependencies = { "nvim-lua/plenary.nvim" } }, 
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }
 }
 
 require("lazy").setup(plugins, opts)
 
 local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", builtin.find_files, {})
+vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
+
+local config = require("nvim-treesitter.configs")
+config.setup({
+  ensure_installed = {"lua", "javascript"},
+  highlight = { enable = true },
+  indent = { enable = true }
+})
 
 -- Catppuccin Setup
 require("catppuccin").setup()
-vim.cmd.colorscheme "catppuccin"
+vim.cmd.colorscheme "catppuccin-mocha"
