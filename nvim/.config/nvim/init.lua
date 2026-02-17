@@ -48,7 +48,7 @@ vim.opt.rtp:prepend(lazypath)
 local opts = {}
 local plugins = {
   { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
-  { "nvim-telescope/telescope.nvim", tag = "latest", dependencies = { "nvim-lua/plenary.nvim" } }, 
+  { "nvim-telescope/telescope.nvim", version = "*", dependencies = { "nvim-lua/plenary.nvim" } }, 
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }
 }
 
@@ -58,13 +58,21 @@ local builtin = require("telescope.builtin")
 vim.keymap.set("n", "<C-p>", builtin.find_files, {})
 vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 
-local config = require("nvim-treesitter.configs")
+local config = require("nvim-treesitter.config")
 config.setup({
-  ensure_installed = {"lua", "javascript"},
+  ensure_installed = {
+    "lua",
+    "javscript",
+    "powershell", 
+    "bash", 
+    "c", 
+    "asm",
+  },
   highlight = { enable = true },
-  indent = { enable = true }
+  indent = { enable = true },
 })
+
 
 -- Catppuccin Setup
 require("catppuccin").setup()
-vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme "catppuccin"
