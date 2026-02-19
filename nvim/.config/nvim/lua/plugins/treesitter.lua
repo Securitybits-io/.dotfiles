@@ -13,6 +13,8 @@ return {
         "asm",
         "markdown",
         "markdown_inline",
+        "dockerfile",
+        "python"
       },
       highlight = { enable = true },
       indent = { enable = true },
